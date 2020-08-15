@@ -1,0 +1,61 @@
+GPUID: 0
+WORKERS: 4
+PRINT_FREQ: 10
+SAVE_FREQ: 10
+PIN_MEMORY: False
+OUTPUT_DIR: 'output'
+
+CUDNN:
+  BENCHMARK: True
+  DETERMINISTIC: False
+  ENABLED: True
+
+DATASET:
+  DATASET: OWN
+  # 数据集根目录
+  ROOT: 'train_full_warped_images'
+  # 训练集和验证集标注文件路径
+  TXT_FILE: {'train': 'train.txt', 'val': 'val.txt'}
+  SCALE_FACTOR: 0.25
+  ROT_FACTOR: 30
+  STD: 0.193
+  MEAN: 0.588
+  ALPHABETS: ''
+
+TRAIN:
+  BATCH_SIZE_PER_GPU: 16
+  SHUFFLE: True
+  BEGIN_EPOCH: 0
+  END_EPOCH: 100
+  # 是否恢复训练
+  RESUME:
+    IS_RESUME: False
+    FILE: ' '
+  OPTIMIZER: 'adam'
+  LR: 0.0001
+  WD: 0.0
+  LR_STEP: [60, 80]
+  LR_FACTOR: 0.1
+  MOMENTUM: 0.0
+  NESTEROV: False
+  RMSPROP_ALPHA:
+  RMSPROP_CENTERED:
+    # 是否微调
+  FINETUNE:
+    IS_FINETUNE: False
+    FINETUNE_CHECKPOINIT: ' '
+    FREEZE: true
+
+TEST:
+  BATCH_SIZE_PER_GPU: 16
+  SHUFFLE: True
+  NUM_TEST: 1000
+  NUM_TEST_DISP: 10
+
+MODEL:
+  NAME: 'crnn'
+  IMAGE_SIZE:
+    OW: 280.
+    H: 32
+    W: 160
+  NUM_HIDDEN: 256
